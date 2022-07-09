@@ -1,6 +1,6 @@
 puts "...seeding"
 
-User.create!(username: "Amy", relationship: "Mother")
-User.create!(username: "Ryan", relationship: "Father")
+User.create!(username: "Amy", relationship: "Mother", password: "123")
+
 
 puts "seeding done"

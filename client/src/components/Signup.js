@@ -1,17 +1,18 @@
 import { useState } from "react";
 
 //// Make this component popup & add x button ///
+//// Show error message on DOM ///
 
 function Signup({ setCurrentUser }) {
   const [username, setUsername] = useState("");
   const [relationship, setRelationship] = useState("");
+  const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   function handleSignup(e) {
     e.preventDefault();
 
-    //// FETCH FROM SIGNUP..??? ///
-    fetch("/users", {
+    fetch("/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -19,6 +20,7 @@ function Signup({ setCurrentUser }) {
       body: JSON.stringify({
         username,
         relationship,
+        password,
         password_confirmation: passwordConfirmation,
       }),
     }).then((res) => {
@@ -62,9 +64,19 @@ function Signup({ setCurrentUser }) {
         </label>
         <input
           type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          name="password"
+          placeholder="Enter Password"
+        />
+         <label>
+          <b>Confirm Password</b>
+        </label>
+        <input
+          type="password"
+          id="password_confirmation"
           value={passwordConfirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
-          name="password"
           placeholder="Enter Password"
         />
         <button type="submit">Signup</button>
