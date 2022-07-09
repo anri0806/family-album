@@ -1,10 +1,12 @@
 import NavBar from "./NavBar";
+import PictureContainer from "./PictureContainer"
 
 function AlbumPage({ onLogout }) {
   return (
     <>
-      <p>this is album page</p>
       <NavBar onLogout={onLogout} />
+      <p>this is album page</p>
+      <PictureContainer />
     </>
   );
 }

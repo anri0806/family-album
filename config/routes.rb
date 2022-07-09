@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   resources :users, only: [:index]
+  resources :pictures, only: [:index, :show]
 
   post "/signup", to: "users#create"
   post "/login", to: "sessions#create"

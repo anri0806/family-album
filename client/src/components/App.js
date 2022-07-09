@@ -7,7 +7,7 @@ import AlbumPage from "./AlbumPage";
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
 
-  console.log(currentUser)
+  // console.log(currentUser)
 
   useEffect(() => {
     fetch("/me").then((res) => {
