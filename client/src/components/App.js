@@ -1,19 +1,29 @@
 import "../App.css";
-import { useState } from "react";
-import LoginHome from "./LoginHome";
+import { useEffect, useState } from "react";
+import Login from "./Login";
+import AlbumPage from "./AlbumPage";
+
 
 function App() {
-  const [currentUser, setCurrentUser] = useState("");
+  const [currentUser, setCurrentUser] = useState(null);
 
-  console.log(currentUser);
+  console.log(currentUser)
 
-  function handleCurrentUser(userData) {
-    setCurrentUser(userData);
+  useEffect(() => {
+    fetch("/me").then((res) => {
+      if (res.ok) {
+        res.json().then((user) => setCurrentUser(user));
+      }
+    });
+  }, []);
+
+  function handleLogout() {
+    setCurrentUser(null);
   }
 
   return (
     <div className="App">
-      <LoginHome setCurrentUser={handleCurrentUser} />
+      {currentUser ? <AlbumPage onLogout={handleLogout} /> : <Login onLogin={setCurrentUser} />}
     </div>
   );
 }

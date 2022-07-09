@@ -1,13 +1,13 @@
 import { useState } from "react";
 
 //// Make this component popup & add x button ///
-//// Show error message on DOM ///
 
-function Signup({ setCurrentUser }) {
+function Signup({ onLogin }) {
   const [username, setUsername] = useState("");
   const [relationship, setRelationship] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [errors, setErrors] = useState([]);
 
   function handleSignup(e) {
     e.preventDefault();
@@ -25,7 +25,9 @@ function Signup({ setCurrentUser }) {
       }),
     }).then((res) => {
       if (res.ok) {
-        res.json().then((userInfo) => setCurrentUser(userInfo));
+        res.json().then((user) => onLogin(user));
+      } else {
+        res.json().then((err) => setErrors(err.errors));
       }
     });
   }
@@ -69,7 +71,7 @@ function Signup({ setCurrentUser }) {
           name="password"
           placeholder="Enter Password"
         />
-         <label>
+        <label>
           <b>Confirm Password</b>
         </label>
         <input
@@ -80,6 +82,9 @@ function Signup({ setCurrentUser }) {
           placeholder="Enter Password"
         />
         <button type="submit">Signup</button>
+        {errors.map((err) => (
+          <p key={err}>{err}</p>
+        ))}
       </form>
     </>
   );

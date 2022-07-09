@@ -1,9 +1,17 @@
 import { useState } from "react";
 import Signup from "./Signup";
 
-function LoginHome({setCurrentUser}) {
-  const [username, setUsername] = useState("");
+function Login({ onLogin }) {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
   const [signupToggle, setSignupToggle] = useState(false);
+  const [error, setError] = useState([]);
+
+  function handleChange(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
 
   function handleLogin(e) {
     e.preventDefault();
@@ -13,11 +21,16 @@ function LoginHome({setCurrentUser}) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username }),
-    })
-      .then((res) => res.json())
-      .then((user) => console.log(user));
-    //START FROM HERE - render album page after login
+      body: JSON.stringify(formData),
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((currentUser) => {
+          onLogin(currentUser);
+        });
+      } else {
+        res.json().then((err) => setError(err.error));
+      }
+    });
   }
 
   function handleClick() {
@@ -35,20 +48,32 @@ function LoginHome({setCurrentUser}) {
         </label>
         <input
           type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={formData.username}
+          onChange={handleChange}
           name="username"
           placeholder="Enter Username"
         />
         <label>
           <b>Password</b>
         </label>
-        <input type="password" name="password" placeholder="Enter Password" />
+        <input
+          type="password"
+          value={formData.password}
+          onChange={handleChange}
+          name="password"
+          placeholder="Enter Password"
+        />
         <button type="submit">Login</button>
+        {error ? (
+          <>
+            {" "}
+            <p>{error}</p>
+          </>
+        ) : null}
       </form>
       <h3>Don't have an account?</h3>
       {signupToggle ? (
-        <Signup setCurrentUser={setCurrentUser} />
+        <Signup onLogin={onLogin} />
       ) : (
         <button onClick={handleClick}>Create new account</button>
       )}
@@ -56,4 +81,4 @@ function LoginHome({setCurrentUser}) {
   );
 }
 
-export default LoginHome;
+export default Login;
