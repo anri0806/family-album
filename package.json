@@ -9,5 +9,9 @@
     "clean": "rm -rf public",
     "deploy": "cp -a client/build/. public/",
     "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
+  },
+  "dependencies": {
+    "firebase": "^9.9.0",
+    "uuid": "^8.3.2"
   }
 }

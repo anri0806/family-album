@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import Login from "./Login";
 import AlbumPage from "./AlbumPage";
 
-
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -23,7 +22,11 @@ function App() {
 
   return (
     <div className="App">
-      {currentUser ? <AlbumPage onLogout={handleLogout} /> : <Login onLogin={setCurrentUser} />}
+      {currentUser ? (
+        <AlbumPage currentUser={currentUser} onLogout={handleLogout} />
+      ) : (
+        <Login onLogin={setCurrentUser} />
+      )}
     </div>
   );
 }

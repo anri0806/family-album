@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   
-  resources :users, only: [:index]
-  resources :pictures, only: [:index, :show]
+  resources :users, only: [:index] do
+    ##### CHECK if I can render custom nested attributes to remove unneccesary atr
+    resources :pictures, only: [:index]
+  end
+
+  resources :pictures, only: [:index, :show, :create]
 
   post "/signup", to: "users#create"
   post "/login", to: "sessions#create"
