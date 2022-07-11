@@ -20,6 +20,16 @@ class PicturesController < ApplicationController
         render json: picture, status: :created
     end
 
+    def destroy
+        picture = Picture.find_by(id: params[:id])
+        if picture
+            picture.destroy
+            head :no_content
+        else
+            render json: { error: "Picture not found"}, status: :not_found
+        end
+    end
+
     private
 
     def picture_params

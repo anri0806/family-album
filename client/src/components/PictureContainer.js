@@ -1,8 +1,9 @@
 import Picture from "./Picture";
 
-function PictureContainer({ pics }) {
-  const picCard = pics.map((pic) => <Picture key={pic.id} pic={pic} />);
-
+function PictureContainer({ pics, onDelete }) {
+  const picCard = pics.map((pic) => (
+    <Picture key={pic.id} pic={pic} onDelete={onDelete} />
+  ));
 
   return <>{picCard}</>;
 }

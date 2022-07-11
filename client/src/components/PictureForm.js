@@ -11,7 +11,6 @@ function PictureForm({ currentUser, onSubmit }) {
     user_id: currentUser.id,
   });
 
-  console.log("outside", uploadImage)
   
   const imageListRef = ref(storage, "images/");
 

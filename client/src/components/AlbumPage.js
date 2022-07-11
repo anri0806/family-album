@@ -13,7 +13,12 @@ function AlbumPage({ onLogout, currentUser }) {
   }, []);
 
   function handlePostPicture(newPic) {
-    setPictures([...pictures, newPic])
+    setPictures([...pictures, newPic]);
+  }
+
+  function handleDeletePicture(item) {
+    const updatedPictures = pictures.filter((pic) => pic.id !== item.id);
+    setPictures(updatedPictures);
   }
 
   return (
@@ -22,7 +27,7 @@ function AlbumPage({ onLogout, currentUser }) {
       <p>this is album page</p>
       <PictureForm currentUser={currentUser} onSubmit={handlePostPicture} />
       <br />
-      <PictureContainer pics={pictures} />
+      <PictureContainer pics={pictures} onDelete={handleDeletePicture} />
     </>
   );
 }

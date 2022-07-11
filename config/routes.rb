@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :pictures, only: [:index]
   end
 
-  resources :pictures, only: [:index, :show, :create]
+  resources :pictures, only: [:index, :show, :create, :destroy]
 
   post "/signup", to: "users#create"
   post "/login", to: "sessions#create"
