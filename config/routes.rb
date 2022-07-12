@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   resources :pictures, only: [:index, :show, :create, :destroy]
 
+  resources :comments, only: [:index, :show]
+
   post "/signup", to: "users#create"
   post "/login", to: "sessions#create"
   get "/me", to: "users#show"
