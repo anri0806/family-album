@@ -1,27 +1,15 @@
-import { useState } from "react";
+
 import PictureCard from "./PictureCard";
 
-function PictureContainer({ pics, onDelete }) {
-  const [comments, setComments] = useState([]);
+function PictureContainer({ pics, onDelete, currentUser }) {
 
-  function handleRenderComment(item) {
-    fetch("/comments")
-      .then((res) => res.json())
-      .then((comments) => {
-        const filteredComment = comments.filter(
-          (com) => com.picture_id === item.id
-        );
-        setComments(filteredComment);
-      });
-  }
 
   const picCard = pics.map((pic) => (
     <PictureCard
       key={pic.id}
       pic={pic}
-      comments={comments}
+      currentUser={currentUser}
       onDelete={onDelete}
-      onClickComment={handleRenderComment}
     />
   ));
 

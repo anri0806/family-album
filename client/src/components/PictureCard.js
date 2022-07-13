@@ -1,13 +1,11 @@
 import { useState } from "react";
-import PictureComment from "./PictureComment";
+import Picture from "./Picture";
 
-function PictureCard({ pic, onDelete, onClickComment, comments }) {
+function PictureCard({ pic, onDelete, currentUser }) {
   const [imageClicked, setImageClicked] = useState(false);
 
   function handleClick() {
     setImageClicked((imageClicked) => !imageClicked);
-
-    onClickComment(pic);
   }
 
   function handleClosePopUp() {
@@ -17,9 +15,9 @@ function PictureCard({ pic, onDelete, onClickComment, comments }) {
   return (
     <>
       {imageClicked ? (
-        <PictureComment
+        <Picture
           pic={pic}
-          comments={comments}
+          currentUser={currentUser}
           onDelete={onDelete}
           onClickClose={handleClosePopUp}
         />

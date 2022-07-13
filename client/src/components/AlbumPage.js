@@ -27,7 +27,11 @@ function AlbumPage({ onLogout, currentUser }) {
       <p>this is album page</p>
       <PictureForm currentUser={currentUser} onSubmit={handlePostPicture} />
       <br />
-      <PictureContainer pics={pictures} onDelete={handleDeletePicture} />
+      <PictureContainer
+        pics={pictures}
+        currentUser={currentUser}
+        onDelete={handleDeletePicture}
+      />
     </>
   );
 }

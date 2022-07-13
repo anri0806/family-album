@@ -1,18 +1,44 @@
 class CommentsController < ApplicationController
 
+
     def index
-        comments = Comment.all
-        render json: comments
+        if params[:user_id]
+            user = User.find_by(params[:user_id])
+            comments = user.comment
+        else
+            comments = Comment.all
+        end
+        render json: comments, include: :user
     end
 
     def show
-        comment = Comment.find_by(id: session[:comment_id])
+        comment = Comment.find_by(id: params[:id])
+        render json: comment
+    end
 
-        if comment
-            render json: comment
+    def create
+        comment = Comment.create(comment_params)
+        if comment.valid?
+            render json: comment, status: :created
         else
-            render json: {error: "Not found"}, status: :not_found
+            render json: {error: comment.errors.full_messages}, status: :unprocessable_entity
         end
+    end
+
+    def destroy
+        comment = Comment.find_by(id: params[:id])
+        if comment
+            comment.destroy
+            head :no_content
+        else
+            render json: {error: "Comment not found"}, status: :not_found
+        end
+    end
+
+    private
+
+    def comment_params
+        params.permit(:content, :user_id, :picture_id)
     end
 
 end
