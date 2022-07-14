@@ -3,19 +3,19 @@ import { storage } from "./firebase";
 import { listAll, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 
-function PictureForm({ currentUser, onSubmit }) {
+function PictureForm({ currentUser, onSubmitAddPic }) {
   const [uploadImage, setUploadImage] = useState("");
+  const [errors, setErrors] = useState([]);
   const [formData, setFormData] = useState({
     image: "",
     caption: "",
     user_id: currentUser.id,
   });
 
-  
-  const imageListRef = ref(storage, "images/");
-
   useEffect(() => {
+    const imageListRef = ref(storage, "images/");
     const imageRef = ref(storage, `images/${uploadImage.name + v4()}`);
+
     uploadBytes(imageRef, uploadImage).then(() => {
       listAll(imageListRef).then((response) => {
         response.items.filter((item) => {
@@ -29,11 +29,12 @@ function PictureForm({ currentUser, onSubmit }) {
         });
       });
     });
+
+    setUploadImage("");
   }, [uploadImage]);
 
   function handleUpload(e) {
     setUploadImage(e.target.files[0]);
-    console.log("inside", uploadImage)
   }
 
   function handleChange(e) {
@@ -49,13 +50,18 @@ function PictureForm({ currentUser, onSubmit }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
-    })
-      .then((res) => res.json())
-      .then((newPicture) => onSubmit(newPicture));
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((newPicture) => onSubmitAddPic(newPicture));
+      } else {
+        res.json().then((err) => setErrors(err.errors));
+      }
+    });
 
     setFormData({
       image: "",
       caption: "",
+      user_id: currentUser.id,
     });
   }
 
@@ -72,6 +78,14 @@ function PictureForm({ currentUser, onSubmit }) {
         />
         <button type="submit">Post</button>
       </form>
+      {errors
+        ? errors.map((err) => (
+            <div>
+              {" "}
+              <p>{err}</p>{" "}
+            </div>
+          ))
+        : null}
     </>
   );
 }

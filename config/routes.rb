@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :pictures, only: [:index, :show, :create, :destroy]
 
   ### nested router for :show and create?
-  resources :comments, only: [:index, :show, :create, :destroy]
+  resources :comments, only: [:index, :show, :create, :update, :destroy]
 
   post "/signup", to: "users#create"
   post "/login", to: "sessions#create"

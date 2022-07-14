@@ -1,28 +1,4 @@
-import { useEffect, useState } from "react";
-import Comment from "./Comment";
-
-function Picture({ pic, onDelete, onClickClose, currentUser }) {
-  const [comments, setComments] = useState([]);
-
-  useEffect(() => {
-    fetch("/comments")
-      .then((res) => res.json())
-      .then((comments) => {
-        const filteredComment = comments.filter(
-          (com) => com.picture_id === pic.id
-        );
-        setComments(filteredComment);
-      });
-  }, [pic.id]);
-
-  function handleRenderNewComment(newComments) {
-    setComments([...comments, newComments]);
-  }
-
-  function handleDeleteComment(deletedItem) {
-    const updatedComments = comments.filter((com) => com.id !== deletedItem.id);
-    setComments(updatedComments);
-  }
+function Picture({ pic, onDelete, onClickClose}) {
 
   function handleDeletePic() {
     fetch(`/pictures/${pic.id}`, {
@@ -47,13 +23,6 @@ function Picture({ pic, onDelete, onClickClose, currentUser }) {
       {/* Added who posted (when i post, its not associated yet) */}
       {/* <p>Posted by {pic.user.username}</p> */}
       <p>"{pic.caption}"</p>
-      <Comment
-        comments={comments}
-        pic={pic}
-        currentUser={currentUser}
-        onSubmit={handleRenderNewComment}
-        onDelete={handleDeleteComment}
-      />
     </>
   );
 }

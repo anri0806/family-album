@@ -4,5 +4,8 @@ class Picture < ApplicationRecord
 
     has_many :comments
     has_many :users, through: :comments
+
+    validates :image, presence: true
+    validates :caption, length: {maximum: 100}
 end
 

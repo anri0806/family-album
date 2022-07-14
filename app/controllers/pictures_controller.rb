@@ -17,7 +17,11 @@ class PicturesController < ApplicationController
     
     def create
         picture = Picture.create(picture_params)
-        render json: picture, status: :created
+        if picture.valid?
+            render json: picture, status: :created
+        else
+            render json: { errors: [picture.errors.full_messages] }, status: :unprocessable_entity
+        end
     end
 
     def destroy

@@ -25,7 +25,10 @@ function AlbumPage({ onLogout, currentUser }) {
     <>
       <NavBar onLogout={onLogout} />
       <p>this is album page</p>
-      <PictureForm currentUser={currentUser} onSubmit={handlePostPicture} />
+      <PictureForm
+        currentUser={currentUser}
+        onSubmitAddPic={handlePostPicture}
+      />
       <br />
       <PictureContainer
         pics={pictures}
