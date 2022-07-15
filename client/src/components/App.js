@@ -1,11 +1,11 @@
 import "../App.css";
 import { useEffect, useState } from "react";
 import Login from "./Login";
-import AlbumPage from "./AlbumPage";
+import Home from "./Home";
+
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
-
 
   useEffect(() => {
     fetch("/me").then((res) => {
@@ -22,7 +22,7 @@ function App() {
   return (
     <div className="App">
       {currentUser ? (
-        <AlbumPage currentUser={currentUser} onLogout={handleLogout} />
+        <Home currentUser={currentUser} onLogout={handleLogout} />
       ) : (
         <Login onLogin={setCurrentUser} />
       )}

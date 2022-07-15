@@ -1,6 +1,6 @@
 import { useState } from "react";
-
-//// Make this component popup & add x button ///
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 function Signup({ onLogin }) {
   const [username, setUsername] = useState("");
@@ -34,58 +34,64 @@ function Signup({ onLogin }) {
 
   return (
     <>
-      <form onSubmit={handleSignup}>
-        <label>
-          <b>Username</b>
-        </label>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          name="username"
-          placeholder="Enter Username"
-        />
-        <label>
-          <b>Relationship to child</b>
-        </label>
-        <select
-          value={relationship}
-          onChange={(e) => setRelationship(e.target.value)}
-          name="relationship"
-        >
-          <option>Mother</option>
-          <option>Father</option>
-          <option>Grandmother</option>
-          <option>Grandfather</option>
-          <option>Aunt</option>
-          <option>Uncle</option>
-          <option>Other</option>
-        </select>
-        <label>
-          <b>Password</b>
-        </label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          name="password"
-          placeholder="Enter Password"
-        />
-        <label>
-          <b>Confirm Password</b>
-        </label>
-        <input
-          type="password"
-          id="password_confirmation"
-          value={passwordConfirmation}
-          onChange={(e) => setPasswordConfirmation(e.target.value)}
-          placeholder="Enter Password"
-        />
-        <button type="submit">Signup</button>
+      <Form onSubmit={handleSignup}>
+        <Form.Group className="mb-3" controlId="formUsername">
+          <Form.Label className="label">Username</Form.Label>
+          <Form.Control
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            name="username"
+            placeholder="Enter Username"
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formRelationship">
+          <Form.Label className="label">Relationship to child</Form.Label>
+          <Form.Select
+            value={relationship}
+            onChange={(e) => setRelationship(e.target.value)}
+            name="relationship"
+          >
+            <option>Mother</option>
+            <option>Father</option>
+            <option>Grandmother</option>
+            <option>Grandfather</option>
+            <option>Aunt</option>
+            <option>Uncle</option>
+            <option>Other</option>
+          </Form.Select>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formPassword">
+          <Form.Label className="label">Password</Form.Label>
+          <Form.Control
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            placeholder="Enter Password"
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formUsername">
+          <Form.Label className="label">Confirm Password</Form.Label>
+          <Form.Control
+            type="password"
+            id="password_confirmation"
+            value={passwordConfirmation}
+            onChange={(e) => setPasswordConfirmation(e.target.value)}
+            placeholder="Enter Password"
+          />
+        </Form.Group>
+
+        <Button variant="light" type="submit">
+          Signup
+        </Button>
         {errors.map((err) => (
           <p key={err}>{err}</p>
         ))}
-      </form>
+      </Form>
     </>
   );
 }

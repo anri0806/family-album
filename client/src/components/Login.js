@@ -1,6 +1,9 @@
 import { useState } from "react";
 import Signup from "./Signup";
 
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+
 function Login({ onLogin }) {
   const [formData, setFormData] = useState({
     username: "",
@@ -38,46 +41,61 @@ function Login({ onLogin }) {
   }
 
   return (
-    <>
-      <h1>Share your children's photos with your family whenever you want!</h1>
-      <br />
-      <h3>Please login</h3>
-      <form onSubmit={handleLogin}>
-        <label>
-          <b>Username</b>
-        </label>
-        <input
-          type="text"
-          value={formData.username}
-          onChange={handleChange}
-          name="username"
-          placeholder="Enter Username"
-        />
-        <label>
-          <b>Password</b>
-        </label>
-        <input
-          type="password"
-          value={formData.password}
-          onChange={handleChange}
-          name="password"
-          placeholder="Enter Password"
-        />
-        <button type="submit">Login</button>
-        {error ? (
-          <>
-            {" "}
-            <p>{error}</p>
-          </>
-        ) : null}
-      </form>
-      <h3>Don't have an account?</h3>
-      {signupToggle ? (
-        <Signup onLogin={onLogin} />
-      ) : (
-        <button onClick={handleClick}>Create new account</button>
-      )}
-    </>
+    <div>
+      <div className="titles">
+        <h1>
+          <b>Family Album</b>
+        </h1>
+        <p>
+          Share your children's photos with your family privately whenever you
+          want!
+        </p>
+      </div>
+      <div className="login">
+        <Form onSubmit={handleLogin}>
+          <Form.Group className="mb-3" controlId="formUsername">
+            <Form.Label className="label">Username</Form.Label>
+            <Form.Control
+              type="text"
+              value={formData.username}
+              onChange={handleChange}
+              name="username"
+              placeholder="Enter Username"
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formPassword">
+            <Form.Label className="label">Password</Form.Label>
+            <Form.Control
+              type="password"
+              value={formData.password}
+              onChange={handleChange}
+              name="password"
+              placeholder="Enter Password"
+            />
+          </Form.Group>
+
+          <Button variant="light" type="submit">
+            Login
+          </Button>
+          {error ? (
+            <>
+              {" "}
+              <p>{error}</p>
+            </>
+          ) : null}
+        </Form>
+        <br />
+        <p>Don't have an account?</p>
+        {signupToggle ? (
+          <Signup onLogin={onLogin} />
+        ) : (
+          <Button variant="light" onClick={handleClick}>
+            Create new account
+          </Button>
+        )}
+      </div>
+    </div>
   );
 }
 
