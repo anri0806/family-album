@@ -1,4 +1,8 @@
 import { useEffect, useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
+
 import { storage } from "./firebase";
 import { listAll, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
@@ -66,18 +70,34 @@ function PictureForm({ currentUser, onSubmitAddPic }) {
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <label>Upload images</label>
-        <input onChange={handleUpload} type="file" name="image" id="image" />
-        <label>Caption</label>
-        <textarea
-          value={formData.caption}
-          onChange={handleChange}
-          name="caption"
-        />
-        <button type="submit">Post</button>
-      </form>
+    <div className="picture-form">
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formFile">
+          <Form.Control
+            onChange={handleUpload}
+            type="file"
+            name="image"
+            id="image"
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formCaption">
+          <FloatingLabel controlId="floatingTextarea" label="Add caption">
+            <Form.Control
+              value={formData.caption}
+              onChange={handleChange}
+              name="caption"
+              as="textarea"
+              placeholder="Add caption here"
+              style={{ height: "100px" }}
+            />
+          </FloatingLabel>
+        </Form.Group>
+
+        <Button variant="light" type="submit">
+          Post
+        </Button>
+      </Form>
       {errors
         ? errors.map((err) => (
             <div>
@@ -86,7 +106,7 @@ function PictureForm({ currentUser, onSubmitAddPic }) {
             </div>
           ))
         : null}
-    </>
+    </div>
   );
 }
 

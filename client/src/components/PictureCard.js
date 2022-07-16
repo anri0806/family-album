@@ -6,8 +6,6 @@ function PictureCard({ pic, onDelete, currentUser }) {
   const [imageClicked, setImageClicked] = useState(false);
   const [comments, setComments] = useState([]);
 
-
-
   useEffect(() => {
     fetch("/comments")
       .then((res) => res.json())
@@ -64,7 +62,7 @@ function PictureCard({ pic, onDelete, currentUser }) {
           />
         </>
       ) : (
-        <img onClick={handleClick} src={pic.image} alt="family" width="35%" />
+        <img onClick={handleClick} src={pic.image} alt="family" />
       )}
     </>
   );

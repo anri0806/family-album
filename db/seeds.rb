@@ -1,7 +1,7 @@
 puts "...seeding"
 
-u1 = User.create(username: "Amy", relationship: "Mother", password: "123")
-u2 = User.create(username: "Susan", relationship: "Grandmother", password: "abc" )
+u1 = User.create(username: "Amy", relationship: "Mother", password: "123", created_at: "2022-4-5")
+u2 = User.create(username: "Susan", relationship: "Grandmother", password: "abc", created_at: "2022-4-8" )
 
 p1 = Picture.create(image: "/images/picture1.jpg", caption: "She is trying to take picture of me! ", created_at: "2022-5-1" ,user_id: u1.id)
 p2 = Picture.create(image: "/images/picture2.jpg", caption: "Precious brother time at Central Park", created_at: "2022-5-7" , user_id: u1.id)
