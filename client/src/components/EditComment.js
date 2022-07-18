@@ -5,6 +5,9 @@ import Form from "react-bootstrap/Form";
 function EditComment({ com, comId, onEdit, handleHideEdit }) {
   const [updatedComment, setUpdatedComment] = useState(com.content);
 
+  
+  ///////////// edit comment /////////////
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -20,10 +23,12 @@ function EditComment({ com, comId, onEdit, handleHideEdit }) {
       .then((res) => res.json())
       .then((updatedComment) => {
         onEdit(updatedComment);
-        //hide edit
         handleHideEdit();
       });
   }
+
+  ///////////////////////////////////////////////
+  
 
   return (
     <Form onSubmit={handleSubmit} className="edit-comment-container"> 

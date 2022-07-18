@@ -9,6 +9,9 @@ function Signup({ onLogin }) {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [errors, setErrors] = useState([]);
 
+
+  ///////////// post new user info /////////////
+
   function handleSignup(e) {
     e.preventDefault();
 
@@ -32,10 +35,12 @@ function Signup({ onLogin }) {
     });
   }
 
+  ///////////////////////////////////////////////
+
   return (
     <>
       <Form onSubmit={handleSignup}>
-        <Form.Group className="mb-3" controlId="formUsername">
+        <Form.Group className="mb-3" >
           <Form.Label className="label">Username</Form.Label>
           <Form.Control
             type="text"
@@ -46,7 +51,7 @@ function Signup({ onLogin }) {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formRelationship">
+        <Form.Group className="mb-3" >
           <Form.Label className="label">Relationship to child</Form.Label>
           <Form.Select
             value={relationship}
@@ -63,7 +68,7 @@ function Signup({ onLogin }) {
           </Form.Select>
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formPassword">
+        <Form.Group className="mb-3" >
           <Form.Label className="label">Password</Form.Label>
           <Form.Control
             type="password"
@@ -74,7 +79,7 @@ function Signup({ onLogin }) {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formUsername">
+        <Form.Group className="mb-3" >
           <Form.Label className="label">Confirm Password</Form.Label>
           <Form.Control
             type="password"

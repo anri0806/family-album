@@ -12,6 +12,9 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [pictures, setPictures] = useState([]);
 
+
+  ///////////// keep user logged in /////////////
+
   useEffect(() => {
     fetch("/me").then((res) => {
       if (res.ok) {
@@ -19,7 +22,10 @@ function App() {
       }
     });
   }, []);
+ 
+  ///////////////////////////////////////////////
 
+ 
   useEffect(() => {
     fetch("/pictures")
       .then((res) => res.json())
@@ -27,6 +33,8 @@ function App() {
         setPictures(pics);
       });
   }, []);
+
+
 
   function handleLogout() {
     setCurrentUser(null);
@@ -41,9 +49,15 @@ function App() {
     setPictures(updatedPictures);
   }
 
+
+  ///////////// sort data by date //////////////
+
   const sortedPictures = [...pictures].sort((a, b) =>
     a.created_at > b.created_at ? -1 : 1
   );
+
+  ///////////////////////////////////////////////
+
 
   return (
     <div className="App">

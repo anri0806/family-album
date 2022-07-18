@@ -21,6 +21,9 @@ function ReadOnlyComment({
     picture_id: pic.id,
   });
 
+  
+  ///////////// render comments & edit form /////////////
+
   const userComments = comments.map((com) => (
     <div key={com.id}>
       <br/>
@@ -43,9 +46,6 @@ function ReadOnlyComment({
               <span style={{ fontSize: "10px" }}>
                 {com.updated_at.slice(0, 10)}
               </span>
-              {/* <Card.Title>{com.user.username}</Card.Title>
-              <Card.Text>{com.content}</Card.Text>
-              <Card.Text>{com.updated_at.slice(0, 10)}</Card.Text> */}
             </Card.Body>
             {currentUser.id === com.user_id ? (
               <div className="comment-edit-delete-btn">
@@ -79,13 +79,20 @@ function ReadOnlyComment({
     </div>
   ));
 
+
+  ///////////// hide edit form after submit /////////////
+
   function handleHideEdit() {
     setEditCommentId(null);
   }
 
+  ///////////// saves clicked comment id /////////////
+
   function handleClickEdit(com) {
     setEditCommentId(com.id);
   }
+
+  ///////////// add new comment /////////////
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -114,6 +121,8 @@ function ReadOnlyComment({
     });
   }
 
+  ///////////// delete comment /////////////
+
   function handleDelete(com) {
     fetch(`/comments/${com.id}`, {
       method: "DELETE",
@@ -123,6 +132,8 @@ function ReadOnlyComment({
       }
     });
   }
+
+  ///////////////////////////////////////////////
 
   return (
     <div className="comment-detail-compo">

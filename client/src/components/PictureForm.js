@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Alert from 'react-bootstrap/Alert';
+import Alert from "react-bootstrap/Alert";
 import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
 
 import { storage } from "./firebase";
@@ -9,7 +9,7 @@ import { listAll, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 
 function PictureForm({ currentUser, onSubmitAddPic }) {
-  const [showAlert, setShowAlert] = useState(false)
+  const [showAlert, setShowAlert] = useState(false);
   const [uploadImage, setUploadImage] = useState("");
   const [errors, setErrors] = useState([]);
   const [formData, setFormData] = useState({
@@ -17,6 +17,8 @@ function PictureForm({ currentUser, onSubmitAddPic }) {
     caption: "",
     user_id: currentUser.id,
   });
+
+  ///////////// saves uploaded photo to external storage /////////////
 
   useEffect(() => {
     const imageListRef = ref(storage, "images/");
@@ -39,13 +41,18 @@ function PictureForm({ currentUser, onSubmitAddPic }) {
     setUploadImage("");
   }, [uploadImage]);
 
+
   function handleUpload(e) {
     setUploadImage(e.target.files[0]);
   }
 
+
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
+
+
+  ///////////// add new photo /////////////
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -60,7 +67,7 @@ function PictureForm({ currentUser, onSubmitAddPic }) {
       if (res.ok) {
         res.json().then((newPicture) => {
           onSubmitAddPic(newPicture);
-          setShowAlert(true)
+          setShowAlert(true);
         });
       } else {
         res.json().then((err) => setErrors(err.errors));
@@ -74,9 +81,12 @@ function PictureForm({ currentUser, onSubmitAddPic }) {
     });
   }
 
+  ///////////////////////////////////////////////
+
+  
   return (
     <div className="picture-form">
-      { showAlert ? <Alert variant="info">Added successfully!</Alert> : null}
+      {showAlert ? <Alert variant="info">Added successfully!</Alert> : null}
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Control

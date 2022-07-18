@@ -6,6 +6,8 @@ function PictureCard({ pic, onDelete, currentUser }) {
   const [imageClicked, setImageClicked] = useState(false);
   const [comments, setComments] = useState([]);
 
+  ///////////// save clicked photo's comments data /////////////
+
   useEffect(() => {
     fetch("/comments")
       .then((res) => res.json())
@@ -17,6 +19,8 @@ function PictureCard({ pic, onDelete, currentUser }) {
       });
   }, [pic.id]);
 
+  ///////////////////////////////////////////////
+
   function handleDeletePic() {
     fetch(`/pictures/${pic.id}`, {
       method: "DELETE",
@@ -27,11 +31,11 @@ function PictureCard({ pic, onDelete, currentUser }) {
     });
   }
 
+
   function handleRenderNewComment(newItems) {
-    // const newComment = comments.find((com) => com.id === newItems.id )
-    // console.log(newComment)
     setComments([...comments, newItems]);
   }
+
 
   function handleRenderUpdatedComment(updatedItem) {
     const updatedComments = comments.map((com) =>
@@ -40,18 +44,22 @@ function PictureCard({ pic, onDelete, currentUser }) {
     setComments(updatedComments);
   }
 
+
   function handleDeleteComment(deletedItem) {
     const updatedComments = comments.filter((com) => com.id !== deletedItem.id);
     setComments(updatedComments);
   }
 
+
   function handleClick() {
     setImageClicked((imageClicked) => !imageClicked);
   }
+  
 
   function handleClosePopUp() {
     setImageClicked(false);
   }
+
 
   return (
     <>

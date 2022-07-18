@@ -33,7 +33,7 @@ function NavBar({ onLogout }) {
       <Nav.Link href="/aboutme" className="navBar-link">
         About Me
       </Nav.Link>
-      <Nav.Link onClick={handleLogout} href="/" className="navBar-link">
+      <Nav.Link onClick={handleLogout} className="navBar-link">
         Logout
       </Nav.Link>
     </Navbar>

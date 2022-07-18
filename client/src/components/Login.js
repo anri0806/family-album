@@ -12,9 +12,14 @@ function Login({ onLogin }) {
   const [signupToggle, setSignupToggle] = useState(false);
   const [error, setError] = useState([]);
 
+
+  ///////////// control login form /////////////
+
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
+
+  ///////////// submit login info /////////////
 
   function handleLogin(e) {
     e.preventDefault();
@@ -36,9 +41,14 @@ function Login({ onLogin }) {
     });
   }
 
+  ///////////// toggle sign up form /////////////
+
   function handleClick() {
     setSignupToggle((signupToggle) => !signupToggle);
   }
+
+  ///////////////////////////////////////////////
+  
 
   return (
     <div>
