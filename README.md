@@ -12,7 +12,7 @@ It is not easy to share every moment of your children's growth with your family.
 ## Features
 
 - A user can sign up/ log in 
-- A user can add a photo 
+- A user can add and delete a photo 
 - A user can leave, edit, and delete a comment 
 - Displays photos by date
 
