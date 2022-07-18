@@ -57,7 +57,7 @@ function Login({ onLogin }) {
           <b>Family Album</b>
         </h1>
         <p>
-          Share your children's photos with your family privately whenever you
+          Share your children's photos and share with your family privately whenever you
           want!
         </p>
       </div>
