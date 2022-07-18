@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Alert from 'react-bootstrap/Alert';
 import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
 
 import { storage } from "./firebase";
@@ -8,6 +9,7 @@ import { listAll, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 
 function PictureForm({ currentUser, onSubmitAddPic }) {
+  const [showAlert, setShowAlert] = useState(false)
   const [uploadImage, setUploadImage] = useState("");
   const [errors, setErrors] = useState([]);
   const [formData, setFormData] = useState({
@@ -56,7 +58,10 @@ function PictureForm({ currentUser, onSubmitAddPic }) {
       body: JSON.stringify(formData),
     }).then((res) => {
       if (res.ok) {
-        res.json().then((newPicture) => onSubmitAddPic(newPicture));
+        res.json().then((newPicture) => {
+          onSubmitAddPic(newPicture);
+          setShowAlert(true)
+        });
       } else {
         res.json().then((err) => setErrors(err.errors));
       }
@@ -71,8 +76,9 @@ function PictureForm({ currentUser, onSubmitAddPic }) {
 
   return (
     <div className="picture-form">
+      { showAlert ? <Alert variant="info">Added successfully!</Alert> : null}
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formFile">
+        <Form.Group className="mb-3">
           <Form.Control
             onChange={handleUpload}
             type="file"

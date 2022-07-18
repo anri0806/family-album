@@ -10,7 +10,7 @@ function PictureContainer({ pics, onDelete, currentUser }) {
     />
   ));
 
-  return <div className="pic-container">{picCard}</div>;
+  return <div className="pic-container"><ul>{picCard}</ul></div>;
 }
 
 export default PictureContainer;

@@ -1,6 +1,7 @@
 import "../App.css";
 import { useEffect, useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+
 import Login from "./Login";
 import Home from "./Home";
 import PictureForm from "./PictureForm";
@@ -22,7 +23,9 @@ function App() {
   useEffect(() => {
     fetch("/pictures")
       .then((res) => res.json())
-      .then((pics) => setPictures(pics));
+      .then((pics) => {
+        setPictures(pics);
+      });
   }, []);
 
   function handleLogout() {
@@ -30,13 +33,17 @@ function App() {
   }
 
   function handlePostPicture(newPic) {
-    setPictures([...pictures, newPic]);
+    setPictures([newPic, ...pictures]);
   }
 
   function handleDeletePicture(item) {
     const updatedPictures = pictures.filter((pic) => pic.id !== item.id);
     setPictures(updatedPictures);
   }
+
+  const sortedPictures = [...pictures].sort((a, b) =>
+    a.created_at > b.created_at ? -1 : 1
+  );
 
   return (
     <div className="App">
@@ -49,7 +56,7 @@ function App() {
               element={
                 <Home
                   currentUser={currentUser}
-                  pictures={pictures}
+                  pictures={sortedPictures}
                   onDelete={handleDeletePicture}
                 />
               }

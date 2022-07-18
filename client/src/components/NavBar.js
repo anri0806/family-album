@@ -30,7 +30,9 @@ function NavBar({ onLogout }) {
       <Nav.Link href="/form" className="navBar-link">
         Add Photo
       </Nav.Link>
-      <Nav.Link href="/aboutme" className="navBar-link">About Me</Nav.Link>
+      <Nav.Link href="/aboutme" className="navBar-link">
+        About Me
+      </Nav.Link>
       <Nav.Link onClick={handleLogout} href="/" className="navBar-link">
         Logout
       </Nav.Link>

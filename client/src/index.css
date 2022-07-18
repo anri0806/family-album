@@ -113,14 +113,126 @@ code {
   width: 95%;
   margin: 60px auto;
   padding: 20px;
-  column-count: 4;
-  column-gap: 2px;
+  /* column-count: 4;
+  column-gap: 2px; */
+}
+
+ul {
+  margin: auto;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+li {
+  height: 25vh;
+  flex-grow: 1;
+}
+
+.pic-container img {
+  min-width: 100%;
+  max-height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.popup-box {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+.popup-box #close-btn {
+  float: left;
+  cursor: pointer;
+  margin: 70px 20px;
+  color: white;
+}
+
+.box {
+  position: relative;
+  width: 90%;
+  height: auto;
+  /* min-height: 43em; */
+  background-color: white;
+  margin: 70px auto;
+  padding: 10px;
+}
+
+.components {
+  display: inline-flex;
+  width: 100%;
+  height: auto;
+}
+
+.components .delete-image-btn-container {
+  margin: 49% 0 0 88%;
+  display: flex;
+  position: absolute;
+  color: #ababab;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.delete-image-btn-container p {
+  margin-right: 5px;
+}
+
+.delete-image-btn-container #delete-image-btn {
+  margin-top: 5px;
+}
+
+.pic-detail-compo {
+  margin: 10px;
+}
+
+.popup-box .box .pic-detail-compo img {
+  object-fit: contain;
+  /* width: 40%;
+  height: auto; */
+  min-width: 850px;
+  width: 100%;
+  height: auto;
+  max-height: 610px;
+  /* display: block; */
+  /* object-fit: cover; */
+  background-color: black;
+}
+
+.pic-details p {
+  display: inline-block;
+  margin: 10px 15px 0px;
+}
+
+.comment-detail-compo {
+  margin: 10px 0px 0px 50px;
+}
+
+.comment-card {
+  text-align: left;
+  font-size: 15px;
+}
+
+.comment-card .comment-edit-delete-btn {
+  margin: 0 0 0 82%;
+  cursor: pointer;
+}
+
+.edit-comment-container {
+  padding: 8px;
+}
+
+.edit-comment-container button {
+  background-color: #ccbeaf;
+  color: white;
 }
 
 
-.pic-container img {
-  width: 100%;
-  height: auto;
-  display: block;
-  margin: 2px 0px;
+.add-comment-form button {
+  background-color: #ccbeaf;
+  color: white;
 }

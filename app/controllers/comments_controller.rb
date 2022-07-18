@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
     def create
         comment = Comment.create(comment_params)
         if comment.valid?
-            render json: comment, status: :created
+            render json: comment, include: :user, status: :created
         else
             render json: {error: comment.errors.full_messages}, status: :unprocessable_entity
         end
@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
         comment = Comment.find_by(id: params[:id])
         if comment
             comment.update(comment_params)
-            render json: comment
+            render json: comment, include: :user, status: :created
         else
             render json: {error: "Comment not found"}, status: :not_found
         end
