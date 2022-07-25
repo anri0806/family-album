@@ -21,12 +21,12 @@ function ReadOnlyComment({
     picture_id: pic.id,
   });
 
-  
+ 
   ///////////// render comments & edit form /////////////
 
   const userComments = comments.map((com) => (
     <div key={com.id}>
-      <br/>
+      <br />
       <Card className="comment-card" bg="light" border="light">
         {editCommentId === com.id ? (
           <EditComment
@@ -78,7 +78,6 @@ function ReadOnlyComment({
       </Card>
     </div>
   ));
-
 
   ///////////// hide edit form after submit /////////////
 
@@ -135,6 +134,7 @@ function ReadOnlyComment({
 
   ///////////////////////////////////////////////
 
+
   return (
     <div className="comment-detail-compo">
       {userComments}
@@ -157,6 +157,7 @@ function ReadOnlyComment({
         </Button>
       </Form>
       {error ? <p>{error}</p> : null}
+
     </div>
   );
 }

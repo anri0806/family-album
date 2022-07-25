@@ -1,17 +1,11 @@
 import "../App.css";
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
 
 import Login from "./Login";
-import Home from "./Home";
-import PictureForm from "./PictureForm";
-import AboutMe from "./AboutMe";
-import NavBar from "./NavBar";
+import HomeContainer from "./HomeContainer";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
-  const [pictures, setPictures] = useState([]);
-
 
   ///////////// keep user logged in /////////////
 
@@ -22,74 +16,19 @@ function App() {
       }
     });
   }, []);
- 
-  ///////////////////////////////////////////////
 
- 
-  useEffect(() => {
-    fetch("/pictures")
-      .then((res) => res.json())
-      .then((pics) => {
-        setPictures(pics);
-      });
-  }, []);
-
-
+  ///////////// log out /////////////
 
   function handleLogout() {
     setCurrentUser(null);
   }
 
-  function handlePostPicture(newPic) {
-    setPictures([newPic, ...pictures]);
-  }
-
-  function handleDeletePicture(item) {
-    const updatedPictures = pictures.filter((pic) => pic.id !== item.id);
-    setPictures(updatedPictures);
-  }
-
-
-  ///////////// sort data by date //////////////
-
-  const sortedPictures = [...pictures].sort((a, b) =>
-    a.created_at > b.created_at ? -1 : 1
-  );
-
   ///////////////////////////////////////////////
-
 
   return (
     <div className="App">
       {currentUser ? (
-        <>
-          <NavBar onLogout={handleLogout} />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Home
-                  currentUser={currentUser}
-                  pictures={sortedPictures}
-                  onDelete={handleDeletePicture}
-                />
-              }
-            />
-            <Route
-              path="/form"
-              element={
-                <PictureForm
-                  currentUser={currentUser}
-                  onSubmitAddPic={handlePostPicture}
-                />
-              }
-            />
-            <Route
-              path="/aboutme"
-              element={<AboutMe currentUser={currentUser} />}
-            />
-          </Routes>
-        </>
+        <HomeContainer currentUser={currentUser} onLogout={handleLogout} />
       ) : (
         <Login onLogin={setCurrentUser} />
       )}

@@ -1,14 +1,13 @@
 import PictureContainer from "./PictureContainer";
 
-function Home({ currentUser, pictures, onDelete }) {
-
+function Home({ currentUser, pics, onDelete }) {
 
 
   return (
     <>
       <br />
       <PictureContainer
-        pics={pictures}
+        pics={pics}
         currentUser={currentUser}
         onDelete={onDelete}
       />
