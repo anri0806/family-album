@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
   
-  resources :users, only: [:index] do
-    resources :pictures, only: [:index, :show]
-    resources :comments, only: [:index, :show, :create]
-  end
+  resources :users, only: [:index] 
 
   resources :pictures, only: [:index, :show, :create, :destroy]
 
@@ -18,3 +15,8 @@ Rails.application.routes.draw do
   # Leave this here to help deploy your app later!
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 end
+
+  # do
+  #   resources :pictures, only: [:index, :show]
+  #   resources :comments, only: [:index, :show, :create]
+  # end
