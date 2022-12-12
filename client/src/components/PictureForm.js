@@ -18,6 +18,8 @@ function PictureForm({ currentUser, onSubmitAddPic }) {
     user_id: currentUser.id,
   });
 
+  console.log(uploadImage)
+
   ///////////// saves uploaded photo to external storage /////////////
 
   useEffect(() => {

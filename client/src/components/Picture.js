@@ -6,7 +6,7 @@ function Picture({ pic }) {
       <div className="pic-details">
         <p>{pic.created_at.slice(0, 10)}</p>
         <p>"{pic.caption}"</p>
-        <p>Posted by {pic.user.username}</p>
+        <p>Posted by {pic.user.username} ({pic.user.relationship})</p>
       </div>
     </div>
   );
