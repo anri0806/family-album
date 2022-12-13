@@ -7,7 +7,7 @@ import HomeContainer from "./HomeContainer";
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
 
-  ///////////// keep user logged in /////////////
+
 
   useEffect(() => {
     fetch("/me").then((res) => {
@@ -17,13 +17,12 @@ function App() {
     });
   }, []);
 
-  ///////////// log out /////////////
+  
 
   function handleLogout() {
     setCurrentUser(null);
   }
 
-  ///////////////////////////////////////////////
 
   return (
     <div className="App">
