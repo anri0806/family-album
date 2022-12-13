@@ -11,10 +11,10 @@ class CommentsController < ApplicationController
         render json: comments, include: :user
     end
 
-    def show
-        comment = Comment.find_by(id: params[:id])
-        render json: comment
-    end
+    # def show
+    #     comment = Comment.find_by(id: params[:id])
+    #     render json: comment
+    # end
 
     def create
         comment = Comment.create(comment_params)
